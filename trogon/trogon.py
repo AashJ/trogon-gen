@@ -218,6 +218,7 @@ class Trogon(App):
         cli: click.Group,
         app_name: str = None,
         click_context: click.Context = None,
+        cmd_override: str | None = None,
     ) -> None:
         super().__init__()
         self.cli = cli
@@ -228,6 +229,8 @@ class Trogon(App):
             self.app_name = detect_run_string()
         else:
             self.app_name = app_name
+        
+        self.cmd_override = cmd_override
 
     def on_mount(self):
         self.push_screen(CommandBuilder(self.cli, self.app_name))
@@ -257,6 +260,8 @@ class Trogon(App):
                     split_app_name = shlex.split(self.app_name)
                     program_name = shlex.split(self.app_name)[0]
                     arguments = [*split_app_name, *self.post_run_command]
+                    print(self.cmd_override)
+                    print(self.app_name)
                     os.execvp(program_name, arguments)
 
     @on(CommandForm.Changed)
@@ -285,12 +290,11 @@ class Trogon(App):
         open_url(url)
 
 
-def tui(name: str | None = None):
-    print("TROGON DECORATOR")
+def tui(name: str | None = None, cmd_override: str | None = None):
     def decorator(app: click.Group | click.Command):
         @click.pass_context
         def wrapped_tui(ctx, *args, **kwargs):
-            Trogon(app, app_name=name, click_context=ctx).run()
+            Trogon(app, app_name=name, click_context=ctx, cmd_override=cmd_override).run()
 
         if isinstance(app, click.Group):
             app.command(name="tui", help="Open Textual TUI.")(wrapped_tui)
