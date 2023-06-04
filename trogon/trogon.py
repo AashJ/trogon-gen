@@ -286,6 +286,7 @@ class Trogon(App):
 
 
 def tui(name: str | None = None):
+    print("TROGON DECORATOR")
     def decorator(app: click.Group | click.Command):
         @click.pass_context
         def wrapped_tui(ctx, *args, **kwargs):
