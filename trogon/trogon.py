@@ -259,7 +259,7 @@ class Trogon(App):
 
                     split_app_name = shlex.split(self.app_name)
                     program_name = shlex.split(self.app_name)[0]
-                    arguments = [*split_app_name, *self.post_run_command]
+                    arguments = [*self.post_run_command]
                     print(self.cmd_override)
                     print(self.app_name)
                     os.execvp(program_name, arguments)
