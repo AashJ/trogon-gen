@@ -253,15 +253,13 @@ class Trogon(App):
             if self.post_run_command:
                 console = Console()
                 if self.post_run_command and self.execute_on_exit:
-                    console.print(
-                        f"Running [b cyan]{self.app_name} {' '.join(shlex.quote(s) for s in self.post_run_command)}[/]"
-                    )
+                    # console.print(
+                    #     f"Running [b cyan]{self.app_name} {' '.join(shlex.quote(s) for s in self.post_run_command)}[/]"
+                    # )
 
                     split_app_name = shlex.split(self.app_name)
                     program_name = shlex.split(self.app_name)[0]
                     arguments = [*self.post_run_command]
-                    print(self.cmd_override)
-                    print(self.app_name)
                     os.execvp(program_name, arguments)
 
     @on(CommandForm.Changed)
