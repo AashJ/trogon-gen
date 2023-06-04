@@ -260,7 +260,10 @@ class Trogon(App):
                     split_app_name = shlex.split(self.app_name)
                     program_name = shlex.split(self.app_name)[0]
                     print(*split_app_name)
-                    arguments = [*self.post_run_command]
+                    print('=====EVERYTHING BUT FIRST======')
+                    print(split_app_name[1:])
+                    print('======EVERYTHING BUT FIRST=====')
+                    arguments = [*split_app_name, *self.post_run_command]
                     print(program_name, arguments)
                     os.execvp(program_name, arguments)
 
