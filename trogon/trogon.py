@@ -288,6 +288,7 @@ class Trogon(App):
         open_url(url)
 
 
+
 def tui(name: str | None = None, cmd_override: str | None = None):
     def decorator(app: click.Group | click.Command):
         # @click.pass_context
@@ -305,20 +306,3 @@ def tui(name: str | None = None, cmd_override: str | None = None):
         return app
 
     return decorator
-
-def launch_trogon( app: click.Group | click.Command, name: str | None = None, cmd_override: str | None = None):
-        # @click.pass_context
-        # def wrapped_tui(ctx, *args, **kwargs):
-        Trogon(app, app_name=name, cmd_override=cmd_override).run()
-
-        # if isinstance(app, click.Group):
-        #     app.command(name="tui", help="Open Textual TUI.")(wrapped_tui)
-        # else:
-        #     new_group = click.Group()
-        #     new_group.add_command(app)
-        #     new_group.command(name="tui", help="Open Textual TUI.")(wrapped_tui)
-        #     return new_group
-
-        # return app
-
-
