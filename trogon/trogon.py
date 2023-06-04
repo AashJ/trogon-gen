@@ -263,7 +263,7 @@ class Trogon(App):
                     print('=====EVERYTHING BUT FIRST======')
                     print(split_app_name[1:])
                     print('======EVERYTHING BUT FIRST=====')
-                    arguments = [*split_app_name, *self.post_run_command]
+                    arguments = [*(split_app_name[1:]), *self.post_run_command]
                     print(program_name, arguments)
                     os.execvp(program_name, arguments)
 
