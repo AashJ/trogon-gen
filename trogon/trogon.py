@@ -290,11 +290,9 @@ class Trogon(App):
 
 
 def tui(name: str | None = None, cmd_override: str | None = None):
-    print(name)
     def decorator(app: click.Group | click.Command):
         @click.pass_context
         def wrapped_tui(ctx, *args, **kwargs):
-            print(ctx)
             Trogon(app, app_name=name, click_context=ctx, cmd_override=cmd_override).run()
 
         if isinstance(app, click.Group):
